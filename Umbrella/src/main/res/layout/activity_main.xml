@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+
+    <Button
+
+        android:id="@+id/btn_settings"
+        android:onClick="onClick"
+        android:layout_margin="10dp"
+        android:layout_gravity="right"
+        android:background="@drawable/ic_settings_24dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp" />
+    <TextView
+        android:id="@+id/tv_result"
+        android:text="Hello World!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+
+</FrameLayout>
