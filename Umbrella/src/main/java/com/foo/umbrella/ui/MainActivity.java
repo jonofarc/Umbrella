@@ -13,6 +13,7 @@ import com.foo.umbrella.PreferencesManager;
 import com.foo.umbrella.R;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public Weather weather;
     public TextView tv_results;
 
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          if(settings.getString(PreferencesManager.UmbrellaPreferences.zipCode, "").toString() != null){
 
              BASE_URL=new StringBuilder();
-             BASE_URL.append("http://api.wunderground.com/api/e1bef1584936ce74/features/hourly/q/");
+             BASE_URL.append("http://api.wunderground.com/api/e1bef1584936ce74/features/hourly10day/q/");
              BASE_URL.append(settings.getString(PreferencesManager.UmbrellaPreferences.zipCode, "").toString());
              BASE_URL.append("/format.json");
          }else {
@@ -158,30 +160,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         int currentDay=0;
         int currentYear=0;
+
+        ArrayList myHours = new ArrayList<>();
+        ArrayList myDays = new ArrayList<>();
+
+
+
         for(int i=0; i<weather.getHourlyForecast().size(); i++){
 
 
+
             if(currentDay <  Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYday()) || currentYear<Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYear())){
+                if(myHours.size()>0){
+                    myDays.add(myHours);
+                    myHours = new ArrayList<>();
+                }
+
 
                 currentDay=Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYday());
                 currentYear=Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYear());
+
+
+
 
                 results.append("\n\n");
                 results.append(weather.getHourlyForecast().get(i).getFCTTIME().getMonthName()+" "+weather.getHourlyForecast().get(i).getFCTTIME().getMday() );
                 results.append(" weather:");
                 results.append("\n\n");
             }
-
+            myHours.add(weather.getHourlyForecast().get(i));
             results.append(weather.getHourlyForecast().get(i).getFCTTIME().getCivil().toString()+" ");
             results.append(weather.getHourlyForecast().get(i).getTemp().getMetric().toString());
             results.append(" C \n");
 
 
+
         }
         tv_results.setText(results.toString());
-
+        Log.d(TAG, "showData: "+myDays);
 
     }
+
 
 
 
