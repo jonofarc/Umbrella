@@ -2,4 +2,6 @@
     <string name="app_name">Umbrella</string>
     <string name="update_zipcode">Update Zipcode</string>
     <string name="zip_example">Ex. 31050</string>
+    <string name="hour_placeholder">12:00 AM</string>
+    <string name="temp_placeholder">0º</string>
 </resources>

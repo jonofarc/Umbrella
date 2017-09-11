@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import okhttp3.Response;
 
 import com.foo.umbrella.PreferencesManager.UmbrellaPreferences;
 import com.foo.umbrella.Weather.Weather;
+import com.foo.umbrella.data.DayWeatherAdapter;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
@@ -34,6 +37,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     OkHttpClient client;
     public Weather weather;
     public TextView tv_results;
+
+    ArrayList myHours = new ArrayList<>();
+    ArrayList myDays = new ArrayList<>();
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 @Override
                                 public void run() {
 
-                                    //setRecyclerView();
+
                                     showData();
                                 }
                             });
@@ -161,8 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int currentDay=0;
         int currentYear=0;
 
-        ArrayList myHours = new ArrayList<>();
-        ArrayList myDays = new ArrayList<>();
+
 
 
 
@@ -171,15 +180,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             if(currentDay <  Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYday()) || currentYear<Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYear())){
-                if(myHours.size()>0){
-                    myDays.add(myHours);
-                    myHours = new ArrayList<>();
-                }
+
 
 
                 currentDay=Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYday());
                 currentYear=Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYear());
-
+                myDays.add(currentDay);
 
 
 
@@ -188,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 results.append(" weather:");
                 results.append("\n\n");
             }
-            myHours.add(weather.getHourlyForecast().get(i));
+
             results.append(weather.getHourlyForecast().get(i).getFCTTIME().getCivil().toString()+" ");
             results.append(weather.getHourlyForecast().get(i).getTemp().getMetric().toString());
             results.append(" C \n");
@@ -198,7 +204,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         tv_results.setText(results.toString());
         Log.d(TAG, "showData: "+myDays);
+        setRecyclerView();
+    }
 
+
+    public void setRecyclerView(){
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+
+        //mAdapter = new BooksAdapter(resultList);
+        mAdapter = new DayWeatherAdapter(myDays,weather);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
 
