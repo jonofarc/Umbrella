@@ -177,11 +177,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showData(){
-        StringBuilder results = new StringBuilder();
-
-        results.append("Current weather: \n");
-        results.append(weather.getHourlyForecast().get(0).getTemp().getMetric().toString());
-        results.append(" C \n");
 
 
         int currentDay=0;
@@ -189,37 +184,22 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
         for(int i=0; i<weather.getHourlyForecast().size(); i++){
 
 
-
             if(currentDay <  Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYday()) || currentYear<Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYear())){
-
-
 
                 currentDay=Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYday());
                 currentYear=Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYear());
                 myDays.add(currentDay);
 
 
-
-                results.append("\n\n");
-                results.append(weather.getHourlyForecast().get(i).getFCTTIME().getMonthName()+" "+weather.getHourlyForecast().get(i).getFCTTIME().getMday() );
-                results.append(" weather:");
-                results.append("\n\n");
             }
-
-            results.append(weather.getHourlyForecast().get(i).getFCTTIME().getCivil().toString()+" ");
-            results.append(weather.getHourlyForecast().get(i).getTemp().getMetric().toString());
-            results.append(" C \n");
 
 
 
         }
 
-        Log.d(TAG, "showData: "+myDays);
 
         SharedPreferences settings = getSharedPreferences(PreferencesManager.UmbrellaPreferences.umbrellaPrefsFile, 0);
         StringBuilder myString = new StringBuilder();
@@ -248,17 +228,9 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
-
-        //mAdapter = new BooksAdapter(resultList);
         mAdapter = new DayWeatherAdapter(this,myDays,weather);
         mRecyclerView.setAdapter(mAdapter);
     }
