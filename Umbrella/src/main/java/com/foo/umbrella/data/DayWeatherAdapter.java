@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static android.R.layout.simple_list_item_1;
 
@@ -62,16 +63,29 @@ public class DayWeatherAdapter extends RecyclerView.Adapter <DayWeatherAdapter.V
             String s2=weather.getHourlyForecast().get(i).getFCTTIME().getYday().toString();
             if(s1.equals(s2)){
                 hoursArray.add(weather.getHourlyForecast().get(i).getFCTTIME().getCivil().toString());
-                tempArray.add(weather.getHourlyForecast().get(i).getTemp().getMetric().toString());
+                tempArray.add(weather.getHourlyForecast().get(i).getTemp().getMetric());
                 conditionArray.add(weather.getHourlyForecast().get(i).getCondition().toString());
 
+            }
+        }
+
+        String min = (String) Collections.min(tempArray);
+        String max = (String) Collections.max(tempArray);
+        int minPosition=0;
+        int maxPosition=0;
+        for(int i=tempArray.size()-1; i>=0; i--){
+            if(tempArray.get(i).equals(min)){
+                minPosition=i;
+            }
+            if(tempArray.get(i).equals(max)){
+                maxPosition=i;
             }
         }
 
 
 
 
-        HourlyWeatherGridAdapter hourlyWeatherGridAdapter = new HourlyWeatherGridAdapter(mContext, hoursArray,tempArray,conditionArray);
+        HourlyWeatherGridAdapter hourlyWeatherGridAdapter = new HourlyWeatherGridAdapter(mContext, hoursArray,tempArray,conditionArray,minPosition,maxPosition);
         holder.gridView.setAdapter(hourlyWeatherGridAdapter);
 
 

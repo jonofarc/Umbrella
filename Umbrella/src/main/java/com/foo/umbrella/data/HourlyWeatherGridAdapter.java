@@ -2,6 +2,9 @@ package com.foo.umbrella.data;
 import com.foo.umbrella.R;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Jonathan Maldonado on 9/10/2017.
@@ -22,12 +26,18 @@ public class HourlyWeatherGridAdapter extends BaseAdapter {
     ArrayList hoursArray = new ArrayList<>();
     ArrayList conditionArray = new ArrayList<>();
     ArrayList tempArray = new ArrayList<>();
+    int minPosition=0;
+    int maxPosition=0;
 
-    public HourlyWeatherGridAdapter(Context context, ArrayList recivingHoursArray, ArrayList recivingTempArray, ArrayList recivingConditionArray) {
+    public HourlyWeatherGridAdapter(Context context, ArrayList recivingHoursArray, ArrayList recivingTempArray, ArrayList recivingConditionArray,int recivingMinposition, int recivingMaxPosition) {
         mContext = context;
         hoursArray=recivingHoursArray;
         tempArray=recivingTempArray;
         conditionArray=recivingConditionArray;
+
+        //position where the minimun and maximun temp are located
+        minPosition=recivingMinposition;
+        maxPosition=recivingMaxPosition;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -75,6 +85,29 @@ public class HourlyWeatherGridAdapter extends BaseAdapter {
                     condition_IV.setImageResource(R.drawable.weather_sunny);
                     break;
             }
+
+
+
+            Drawable drawable = condition_IV.getDrawable();
+            drawable = DrawableCompat.wrap(drawable);
+
+            if(position==minPosition){
+
+
+
+                DrawableCompat.setTintList(drawable, mContext.getResources().getColorStateList(R.color.weather_cool));
+
+            }else if(position==maxPosition){
+
+
+                    DrawableCompat.setTintList(drawable, mContext.getResources().getColorStateList(R.color.weather_warm));
+
+
+            }else{
+                DrawableCompat.setTintList(drawable, mContext.getResources().getColorStateList(R.color.text_color_primary));
+            }
+
+
 
 
         } else {
