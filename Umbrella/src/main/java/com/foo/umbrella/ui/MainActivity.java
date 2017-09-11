@@ -2,7 +2,9 @@ package com.foo.umbrella.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,12 +32,16 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     final static private String TAG= MainActivity.class.getSimpleName()+"_TAG";
     private StringBuilder BASE_URL;
     OkHttpClient client;
     public Weather weather;
+    private TextView temp_TV;
+    private TextView location_TV;
+    private TextView condition_TV;
+    String currentZipCode;
 
 
 
@@ -51,8 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         client = new OkHttpClient.Builder().build();
-
-
+        temp_TV= (TextView) findViewById(R.id.tv_temp);
+        condition_TV= (TextView) findViewById(R.id.tv_condition);
+        location_TV= (TextView) findViewById(R.id.tv_location);
 
 
 
@@ -61,10 +68,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        
-        UrlBuilder();
 
-        requestWeather();
+        checkZip();
+
+    }
+
+    public void checkZip(){
+        SharedPreferences settings = getSharedPreferences(UmbrellaPreferences.umbrellaPrefsFile, 0);
+        //check if ZipCode exist
+        if(settings.getString(UmbrellaPreferences.zipCode, "").toString().isEmpty()){
+
+            startSettings();
+        }else {
+            currentZipCode=settings.getString(UmbrellaPreferences.zipCode, "").toString();
+            UrlBuilder();
+
+            requestWeather();
+        }
+
     }
 
     public void UrlBuilder(){
@@ -84,18 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btn_settings:
-                Toast.makeText(this, "Going to settings", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, UmbrellaSettings.class);
-                startActivity(intent);
-                break;
 
-            
-        }
-    }
 
 
 
@@ -211,6 +221,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Log.d(TAG, "showData: "+myDays);
 
+        SharedPreferences settings = getSharedPreferences(PreferencesManager.UmbrellaPreferences.umbrellaPrefsFile, 0);
+        StringBuilder myString = new StringBuilder();
+        if(settings.getString(PreferencesManager.UmbrellaPreferences.units, "").toString().equals("Celcius")){
+            myString.append(weather.getHourlyForecast().get(0).getTemp().getMetric().toString());
+        }else{
+            myString.append(weather.getHourlyForecast().get(0).getTemp().getEnglish().toString());
+        }
+        myString.append("º");
+
+        temp_TV.setText(myString.toString());
+        condition_TV.setText(weather.getHourlyForecast().get(0).getCondition().toString());
+
+        myString.setLength(0);
+        myString.append("Zip Code: ");
+        myString.append(currentZipCode);
+        location_TV.setText(myString);
+
+
+
         setRecyclerView();
     }
 
@@ -235,6 +264,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    public void startSettings() {
 
+        Intent intent = new Intent(MainActivity.this, UmbrellaSettings.class);
+        startActivity(intent);
+    }
 
+    public void btnSettingsOnClick(View view) {
+        startSettings();
+    }
 }

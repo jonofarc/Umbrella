@@ -9,4 +9,5 @@
     <string name="date_placeholder">June 02 1989</string>
     <string name="lbl_zip">Zip</string>
     <string name="lbl_units">Units</string>
+    <string name="toast_no_zipCode">Please enter a Zip Code</string>
 </resources>

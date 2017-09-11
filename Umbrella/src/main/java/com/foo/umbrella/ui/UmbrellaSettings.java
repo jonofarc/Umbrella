@@ -62,10 +62,11 @@ public class UmbrellaSettings extends AppCompatActivity {
     private void loadSettings() {
         SharedPreferences settings = getSharedPreferences(UmbrellaPreferences.umbrellaPrefsFile, 0);
         //load ZipCode
-        if(settings.getString(UmbrellaPreferences.zipCode, "").toString() != null){
-            zipCode_ET.setText(settings.getString(UmbrellaPreferences.zipCode, "").toString());
+        if(settings.getString(UmbrellaPreferences.zipCode, "").toString().isEmpty()){
+            Toast.makeText(this, R.string.toast_no_zipCode, Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(this, "Zip Code is null", Toast.LENGTH_SHORT).show();
+
+            zipCode_ET.setText(settings.getString(UmbrellaPreferences.zipCode, "").toString());
         }
         //Load Units
         if(settings.getString(UmbrellaPreferences.units, "").toString() != null){
@@ -95,7 +96,7 @@ public class UmbrellaSettings extends AppCompatActivity {
         editor.commit();
     }
     public void updateUnits() {
-        Toast.makeText(this, "Temperature Units Updated ", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Temperature Units Updated ", Toast.LENGTH_SHORT).show();
         SharedPreferences settings = getSharedPreferences(UmbrellaPreferences.umbrellaPrefsFile, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(UmbrellaPreferences.units,dropdown.getSelectedItem().toString());
