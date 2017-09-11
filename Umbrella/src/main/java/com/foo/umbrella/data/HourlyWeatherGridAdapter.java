@@ -96,15 +96,21 @@ public class HourlyWeatherGridAdapter extends BaseAdapter {
 
 
                 DrawableCompat.setTintList(drawable, mContext.getResources().getColorStateList(R.color.weather_cool));
+                hour_tv.setTextColor(mContext.getResources().getColorStateList(R.color.weather_cool));
+                temp_TV.setTextColor(mContext.getResources().getColorStateList(R.color.weather_cool));
 
             }else if(position==maxPosition){
 
 
-                    DrawableCompat.setTintList(drawable, mContext.getResources().getColorStateList(R.color.weather_warm));
+                DrawableCompat.setTintList(drawable, mContext.getResources().getColorStateList(R.color.weather_warm));
+                hour_tv.setTextColor(mContext.getResources().getColorStateList(R.color.weather_warm));
+                temp_TV.setTextColor(mContext.getResources().getColorStateList(R.color.weather_warm));
 
 
             }else{
                 DrawableCompat.setTintList(drawable, mContext.getResources().getColorStateList(R.color.text_color_primary));
+                hour_tv.setTextColor(mContext.getResources().getColorStateList(R.color.text_color_primary));
+                temp_TV.setTextColor(mContext.getResources().getColorStateList(R.color.text_color_primary));
             }
 
 

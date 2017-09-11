@@ -6,4 +6,5 @@
     <string name="temp_placeholder">0º</string>
     <string name="condition_placeholder">clear</string>
     <string name="location_placeholder">Chihuahua, CUU</string>
+    <string name="date_placeholder">June 02 1989</string>
 </resources>

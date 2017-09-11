@@ -38,6 +38,7 @@ public class DayWeatherAdapter extends RecyclerView.Adapter <DayWeatherAdapter.V
 
 
 
+
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
@@ -57,15 +58,26 @@ public class DayWeatherAdapter extends RecyclerView.Adapter <DayWeatherAdapter.V
         ArrayList hoursArray = new ArrayList<>();
         ArrayList conditionArray = new ArrayList<>();
         ArrayList tempArray = new ArrayList<>();
+        StringBuilder currentDate = new StringBuilder();
+        StringBuilder formatedTemp = new StringBuilder();
 
         for(int i=0; i<weather.getHourlyForecast().size(); i++){
             String s1=mDataset.get(position).toString();
             String s2=weather.getHourlyForecast().get(i).getFCTTIME().getYday().toString();
             if(s1.equals(s2)){
                 hoursArray.add(weather.getHourlyForecast().get(i).getFCTTIME().getCivil().toString());
-                tempArray.add(weather.getHourlyForecast().get(i).getTemp().getMetric());
+
+                formatedTemp.setLength(0);
+                formatedTemp.append(weather.getHourlyForecast().get(i).getTemp().getMetric().toString());
+                formatedTemp.append("º");
+                //tempArray.add(weather.getHourlyForecast().get(i).getTemp().getMetric().toString()+"º");
+                tempArray.add(formatedTemp.toString());
                 conditionArray.add(weather.getHourlyForecast().get(i).getCondition().toString());
 
+                currentDate.setLength(0);
+                currentDate.append(weather.getHourlyForecast().get(i).getFCTTIME().getWeekdayName().toString());
+                currentDate.append(" "+weather.getHourlyForecast().get(i).getFCTTIME().getMonthName().toString());
+                currentDate.append(" "+ weather.getHourlyForecast().get(i).getFCTTIME().getMday().toString());
             }
         }
 
@@ -83,7 +95,10 @@ public class DayWeatherAdapter extends RecyclerView.Adapter <DayWeatherAdapter.V
         }
 
 
+        //show current date on card
 
+
+        holder.currentDate_tv.setText(currentDate.toString());
 
         HourlyWeatherGridAdapter hourlyWeatherGridAdapter = new HourlyWeatherGridAdapter(mContext, hoursArray,tempArray,conditionArray,minPosition,maxPosition);
         holder.gridView.setAdapter(hourlyWeatherGridAdapter);
@@ -103,17 +118,17 @@ public class DayWeatherAdapter extends RecyclerView.Adapter <DayWeatherAdapter.V
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+
 
         GridView gridView;
-        CardView cardView;
+        TextView currentDate_tv;
 
         public ViewHolder(View v) {
             super(v);
 
-
+            currentDate_tv= (TextView) v.findViewById(R.id.tv_date);
             gridView = (GridView) v.findViewById(R.id.gridview);
-            cardView= (CardView) v.findViewById(R.id.cardview);
+
 
 
 
@@ -138,7 +153,7 @@ public class DayWeatherAdapter extends RecyclerView.Adapter <DayWeatherAdapter.V
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.day_weather, parent, false);
-        // set the view's size, margins, paddings and layout parameters
+
 
 
         ViewHolder vh = new ViewHolder(v);
