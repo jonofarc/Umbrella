@@ -17,25 +17,29 @@ import java.util.ArrayList;
 
 public class HourlyWeatherGridAdapter extends BaseAdapter {
 
-    private Context context;
+    private Context mContext;
 
-    private ArrayList mDataset;
+    ArrayList hoursArray = new ArrayList<>();
+    ArrayList conditionArray = new ArrayList<>();
+    ArrayList tempArray = new ArrayList<>();
 
-    public HourlyWeatherGridAdapter(Context context, ArrayList daysData) {
-        this.context = context;
-        mDataset=daysData;
+    public HourlyWeatherGridAdapter(Context context, ArrayList recivingHoursArray, ArrayList recivingTempArray, ArrayList recivingConditionArray) {
+        mContext = context;
+        hoursArray=recivingHoursArray;
+        tempArray=recivingTempArray;
+        conditionArray=recivingConditionArray;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        LayoutInflater inflater = (LayoutInflater) context
+        LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View gridView;
 
         if (convertView == null) {
 
-            gridView = new View(context);
+            gridView = new View(mContext);
 
             // get layout from mobile.xml
             gridView = inflater.inflate(R.layout.hourly_layout, null);
@@ -43,31 +47,35 @@ public class HourlyWeatherGridAdapter extends BaseAdapter {
             // set value into textview
             TextView hour_tv = (TextView) gridView
                     .findViewById(R.id.tv_hour);
-            hour_tv.setText(mDataset.get(position).toString());
+            hour_tv.setText(hoursArray.get(position).toString());
 
             // set value into textview
             TextView temp_TV = (TextView) gridView
-                    .findViewById(R.id.tv_hour);
-            temp_TV.setText(mDataset.get(position).toString());
+                    .findViewById(R.id.tv_temp);
+            temp_TV.setText(tempArray.get(position).toString());
 
             // set image based on selected text
             ImageView condition_IV = (ImageView) gridView
                     .findViewById(R.id.iv_condition);
 
-            /*
-            String mobile = mobileValues[position];
-
-            if (mobile.equals("Windows")) {
-                imageView.setImageResource(R.drawable.windows_logo);
-            } else if (mobile.equals("iOS")) {
-                imageView.setImageResource(R.drawable.ios_logo);
-            } else if (mobile.equals("Blackberry")) {
-                imageView.setImageResource(R.drawable.blackberry_logo);
-            } else {
-                imageView.setImageResource(R.drawable.android_logo);
+            switch (conditionArray.get(position).toString()){
+                case "Rain":
+                    condition_IV.setImageResource(R.drawable.weather_rainy);
+                    break;
+                case "Clear":
+                    condition_IV.setImageResource(R.drawable.weather_sunny);
+                    break;
+                case "Partly Cloudy":
+                    condition_IV.setImageResource(R.drawable.weather_partlycloudy);
+                    break;
+                case "Mostly Cloudy":
+                    condition_IV.setImageResource(R.drawable.weather_cloudy);
+                    break;
+                default:
+                    condition_IV.setImageResource(R.drawable.weather_sunny);
+                    break;
             }
-            */
-            condition_IV.setImageResource(R.drawable.weather_sunny);
+
 
         } else {
             gridView = convertView;
@@ -78,7 +86,7 @@ public class HourlyWeatherGridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mDataset.size();
+        return hoursArray.size();
     }
 
     @Override

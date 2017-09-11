@@ -36,9 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private StringBuilder BASE_URL;
     OkHttpClient client;
     public Weather weather;
-    public TextView tv_results;
 
-    ArrayList myHours = new ArrayList<>();
+
+
+
     ArrayList myDays = new ArrayList<>();
 
     private RecyclerView mRecyclerView;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         client = new OkHttpClient.Builder().build();
-        tv_results= (TextView) findViewById(R.id.tv_result);
+
 
 
         UrlBuilder();
@@ -202,8 +203,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         }
-        tv_results.setText(results.toString());
+
         Log.d(TAG, "showData: "+myDays);
+
         setRecyclerView();
     }
 
@@ -223,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // specify an adapter (see also next example)
 
         //mAdapter = new BooksAdapter(resultList);
-        mAdapter = new DayWeatherAdapter(myDays,weather);
+        mAdapter = new DayWeatherAdapter(this,myDays,weather);
         mRecyclerView.setAdapter(mAdapter);
     }
 

@@ -4,4 +4,6 @@
     <string name="zip_example">Ex. 31050</string>
     <string name="hour_placeholder">12:00 AM</string>
     <string name="temp_placeholder">0º</string>
+    <string name="condition_placeholder">clear</string>
+    <string name="location_placeholder">Chihuahua, CUU</string>
 </resources>
