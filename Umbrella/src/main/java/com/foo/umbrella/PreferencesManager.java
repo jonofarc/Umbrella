@@ -11,6 +11,7 @@ public final class PreferencesManager {
 
         public static final String umbrellaPrefsFile = "PrefsFile";
         public static final String zipCode = "ZipCode";
+        public static final String units = "Units";
 
 
     }

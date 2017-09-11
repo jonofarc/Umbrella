@@ -7,4 +7,6 @@
     <string name="condition_placeholder">clear</string>
     <string name="location_placeholder">Chihuahua, CUU</string>
     <string name="date_placeholder">June 02 1989</string>
+    <string name="lbl_zip">Zip</string>
+    <string name="lbl_units">Units</string>
 </resources>

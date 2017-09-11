@@ -54,13 +54,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        UrlBuilder();
 
-        requestWeather();
 
      }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        
+        UrlBuilder();
 
+        requestWeather();
+    }
 
     public void UrlBuilder(){
          SharedPreferences settings = getSharedPreferences(PreferencesManager.UmbrellaPreferences.umbrellaPrefsFile, 0);

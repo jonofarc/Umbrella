@@ -1,6 +1,7 @@
 package com.foo.umbrella.data;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
@@ -12,8 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.foo.umbrella.PreferencesManager;
 import com.foo.umbrella.R;
 import com.foo.umbrella.Weather.Weather;
 import com.foo.umbrella.ui.MainActivity;
@@ -61,6 +64,9 @@ public class DayWeatherAdapter extends RecyclerView.Adapter <DayWeatherAdapter.V
         StringBuilder currentDate = new StringBuilder();
         StringBuilder formatedTemp = new StringBuilder();
 
+        SharedPreferences settings = mContext.getSharedPreferences(PreferencesManager.UmbrellaPreferences.umbrellaPrefsFile, 0);
+
+
         for(int i=0; i<weather.getHourlyForecast().size(); i++){
             String s1=mDataset.get(position).toString();
             String s2=weather.getHourlyForecast().get(i).getFCTTIME().getYday().toString();
@@ -68,7 +74,13 @@ public class DayWeatherAdapter extends RecyclerView.Adapter <DayWeatherAdapter.V
                 hoursArray.add(weather.getHourlyForecast().get(i).getFCTTIME().getCivil().toString());
 
                 formatedTemp.setLength(0);
-                formatedTemp.append(weather.getHourlyForecast().get(i).getTemp().getMetric().toString());
+
+                if(settings.getString(PreferencesManager.UmbrellaPreferences.units, "").toString().equals("Celcius")){
+                    formatedTemp.append(weather.getHourlyForecast().get(i).getTemp().getMetric().toString());
+                }else{
+                    formatedTemp.append(weather.getHourlyForecast().get(i).getTemp().getEnglish().toString());
+                }
+
                 formatedTemp.append("º");
                 //tempArray.add(weather.getHourlyForecast().get(i).getTemp().getMetric().toString()+"º");
                 tempArray.add(formatedTemp.toString());
@@ -95,9 +107,8 @@ public class DayWeatherAdapter extends RecyclerView.Adapter <DayWeatherAdapter.V
         }
 
 
+
         //show current date on card
-
-
         holder.currentDate_tv.setText(currentDate.toString());
 
         HourlyWeatherGridAdapter hourlyWeatherGridAdapter = new HourlyWeatherGridAdapter(mContext, hoursArray,tempArray,conditionArray,minPosition,maxPosition);
@@ -122,6 +133,7 @@ public class DayWeatherAdapter extends RecyclerView.Adapter <DayWeatherAdapter.V
 
         GridView gridView;
         TextView currentDate_tv;
+
 
         public ViewHolder(View v) {
             super(v);

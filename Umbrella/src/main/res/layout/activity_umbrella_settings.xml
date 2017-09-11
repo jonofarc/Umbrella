@@ -9,7 +9,12 @@
     android:layout_height="match_parent"
     tools:context="com.foo.umbrella.ui.UmbrellaSettings">
 
-
+    <TextView
+        android:text="@string/lbl_zip"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/et_zipCode"
         android:hint="@string/zip_example"
@@ -21,5 +26,18 @@
         android:text="@string/update_zipcode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <TextView
+        android:text="@string/lbl_units"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Spinner
+
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
 
 </LinearLayout>
