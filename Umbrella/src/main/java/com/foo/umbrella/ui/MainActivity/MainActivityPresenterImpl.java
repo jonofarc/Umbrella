@@ -1,4 +1,4 @@
-package com.foo.umbrella.ui;
+package com.foo.umbrella.ui.MainActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -153,27 +153,33 @@ public class MainActivityPresenterImpl implements MainActivityPresenter {
         int currentDay=0;
         int currentYear=0;
 
+        if(weather.getHourlyForecast() != null){
+            for(int i=0; i<weather.getHourlyForecast().size(); i++){
 
 
-        for(int i=0; i<weather.getHourlyForecast().size(); i++){
+                if(currentDay <  Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYday()) || currentYear<Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYear())){
+
+                    currentDay=Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYday());
+                    currentYear=Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYear());
+                    myDays.add(currentDay);
 
 
-            if(currentDay <  Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYday()) || currentYear<Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYear())){
+                }
 
-                currentDay=Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYday());
-                currentYear=Integer.parseInt(weather.getHourlyForecast().get(i).getFCTTIME().getYear());
-                myDays.add(currentDay);
 
 
             }
 
 
-
+            displayCurrentWeather();
+            interactor.setRecyclerView(weather, myDays);
+        }
+        else {
+            interactor.startSettings();
+            Toast.makeText(mContext, "Invalid Zip Code", Toast.LENGTH_SHORT).show();
         }
 
 
-        displayCurrentWeather();
-        interactor.setRecyclerView(weather, myDays);
     }
     public void displayCurrentWeather (){
         SharedPreferences settings = mContext.getSharedPreferences(PreferencesManager.UmbrellaPreferences.umbrellaPrefsFile, 0);
@@ -188,7 +194,7 @@ public class MainActivityPresenterImpl implements MainActivityPresenter {
             interactor.setColors(currentTemp, cTempLimit);
         }else{
             temp.append(weather.getHourlyForecast().get(0).getTemp().getEnglish().toString());
-            currentTemp=Integer.parseInt( weather.getHourlyForecast().get(0).getTemp().getMetric());
+            currentTemp=Integer.parseInt( weather.getHourlyForecast().get(0).getTemp().getEnglish());
             interactor.setColors(currentTemp, fTempLimit);
         }
         temp.append("º");

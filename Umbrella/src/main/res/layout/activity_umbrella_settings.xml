@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.foo.umbrella.ui.UmbrellaSettings">
+    tools:context="com.foo.umbrella.ui.UmbrellaSettings.UmbrellaSettings">
 
     <TextView
         android:text="@string/lbl_zip"

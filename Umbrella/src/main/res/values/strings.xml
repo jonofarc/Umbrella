@@ -5,7 +5,7 @@
     <string name="hour_placeholder">12:00 AM</string>
     <string name="temp_placeholder">0º</string>
     <string name="condition_placeholder">clear</string>
-    <string name="location_placeholder">Chihuahua, CUU</string>
+    <string name="location_placeholder"> </string>
     <string name="date_placeholder">June 02 1989</string>
     <string name="lbl_zip">Zip</string>
     <string name="lbl_units">Units</string>

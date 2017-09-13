@@ -3,33 +3,22 @@ package com.foo.umbrella.data;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.foo.umbrella.PreferencesManager;
 import com.foo.umbrella.R;
 import com.foo.umbrella.Weather.Weather;
-import com.foo.umbrella.ui.MainActivity;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import static android.R.layout.simple_list_item_1;
 
 /**
  * Created by Jonathan Maldonado on 9/9/2017.

@@ -1,4 +1,4 @@
-package com.foo.umbrella.ui;
+package com.foo.umbrella.ui.MainActivity;
 
 import com.foo.umbrella.Weather.Weather;
 
