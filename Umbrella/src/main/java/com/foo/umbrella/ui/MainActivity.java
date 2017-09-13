@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -201,12 +202,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        displayCurrentWeather();
+        setRecyclerView();
+    }
+    public void displayCurrentWeather (){
         SharedPreferences settings = getSharedPreferences(PreferencesManager.UmbrellaPreferences.umbrellaPrefsFile, 0);
         StringBuilder myString = new StringBuilder();
+        int currentTemp;
+        int fTempLimit=60;
+        int cTempLimit=15;
+
         if(settings.getString(PreferencesManager.UmbrellaPreferences.units, "").toString().equals("Celcius")){
             myString.append(weather.getHourlyForecast().get(0).getTemp().getMetric().toString());
+            currentTemp=Integer.parseInt( weather.getHourlyForecast().get(0).getTemp().getMetric());
+            setColors(currentTemp, cTempLimit);
         }else{
             myString.append(weather.getHourlyForecast().get(0).getTemp().getEnglish().toString());
+            currentTemp=Integer.parseInt( weather.getHourlyForecast().get(0).getTemp().getMetric());
+            setColors(currentTemp, fTempLimit);
         }
         myString.append("º");
 
@@ -218,11 +231,21 @@ public class MainActivity extends AppCompatActivity {
         myString.append(currentZipCode);
         location_TV.setText(myString);
 
-
-
-        setRecyclerView();
     }
 
+    public void setColors(int temp,int tempLimit){
+
+        LinearLayout linearLayout;
+        linearLayout= (LinearLayout) findViewById(R.id.weather_background);
+        if(temp> tempLimit){
+            linearLayout.setBackgroundColor(getResources().getColor(R.color.weather_warm));
+
+        }else{
+            linearLayout.setBackgroundColor(getResources().getColor(R.color.weather_cool));
+
+        }
+
+    }
 
     public void setRecyclerView(){
 
