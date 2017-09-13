@@ -91,7 +91,7 @@ public class HourlyWeatherGridAdapter extends BaseAdapter {
             Drawable drawable = condition_IV.getDrawable();
             drawable = DrawableCompat.wrap(drawable);
 
-            if(position==minPosition){
+            if(position==minPosition && minPosition!=maxPosition){
 
 
 
@@ -99,7 +99,7 @@ public class HourlyWeatherGridAdapter extends BaseAdapter {
                 hour_tv.setTextColor(mContext.getResources().getColorStateList(R.color.weather_cool));
                 temp_TV.setTextColor(mContext.getResources().getColorStateList(R.color.weather_cool));
 
-            }else if(position==maxPosition){
+            }else if(position==maxPosition && minPosition!=maxPosition){
 
 
                 DrawableCompat.setTintList(drawable, mContext.getResources().getColorStateList(R.color.weather_warm));
@@ -122,6 +122,7 @@ public class HourlyWeatherGridAdapter extends BaseAdapter {
 
         return gridView;
     }
+
 
     @Override
     public int getCount() {
