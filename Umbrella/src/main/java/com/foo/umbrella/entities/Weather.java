@@ -1,5 +1,5 @@
 
-package com.foo.umbrella.weather;
+package com.foo.umbrella.entities;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

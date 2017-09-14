@@ -1,10 +1,10 @@
 
-package com.foo.umbrella.weather;
+package com.foo.umbrella.entities;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Dewpoint {
+public class Qpf {
 
     @SerializedName("english")
     @Expose

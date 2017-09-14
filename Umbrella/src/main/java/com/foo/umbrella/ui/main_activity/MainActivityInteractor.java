@@ -1,6 +1,6 @@
 package com.foo.umbrella.ui.main_activity;
 
-import com.foo.umbrella.weather.Weather;
+import com.foo.umbrella.entities.Weather;
 
 import java.util.ArrayList;
 
@@ -9,6 +9,7 @@ import java.util.ArrayList;
  */
 
 public interface MainActivityInteractor {
+
     void startSettings();
 
     void setRecyclerView(Weather weather, ArrayList myDays);

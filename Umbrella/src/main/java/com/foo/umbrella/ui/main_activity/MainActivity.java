@@ -13,7 +13,7 @@ import com.foo.umbrella.R;
 
 import java.util.ArrayList;
 
-import com.foo.umbrella.weather.Weather;
+import com.foo.umbrella.entities.Weather;
 import com.foo.umbrella.data.DayWeatherAdapter;
 import com.foo.umbrella.ui.umbrella_settings.UmbrellaSettings;
 
@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
         presenter.getWeather();
     }
 
-
     public void displayCurrentWeather(String temp, String condition, String currentZipcode) {
         temp_TV.setText(temp);
         condition_TV.setText(condition);
@@ -58,12 +56,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
         linearLayout = (LinearLayout) findViewById(R.id.weather_background);
         if (temp > tempLimit) {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.weather_warm));
-
         } else {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.weather_cool));
-
         }
-
     }
 
     public void setRecyclerView(Weather weather, ArrayList myDays) {
@@ -73,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
         mAdapter = new DayWeatherAdapter(this, myDays, weather);
         mRecyclerView.setAdapter(mAdapter);
     }
-
 
     public void startSettings() {
         Intent intent = new Intent(this, UmbrellaSettings.class);

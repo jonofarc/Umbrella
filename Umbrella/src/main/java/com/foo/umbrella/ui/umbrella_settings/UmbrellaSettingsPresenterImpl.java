@@ -12,6 +12,7 @@ import com.foo.umbrella.R;
  */
 
 public class UmbrellaSettingsPresenterImpl implements UmbrellaSettingsPresenter {
+
     Context mContext;
     UmbrellaSettingsInteractor interactor;
 
@@ -19,7 +20,6 @@ public class UmbrellaSettingsPresenterImpl implements UmbrellaSettingsPresenter 
         mContext = umbrellaSettings;
         interactor = umbrellaSettings;
     }
-
 
     public void loadSettings() {
         String zipCode = "";
@@ -38,7 +38,6 @@ public class UmbrellaSettingsPresenterImpl implements UmbrellaSettingsPresenter 
             } else {
                 unitSelection = 1;
             }
-
         } else {
             Toast.makeText(mContext, "Units are null", Toast.LENGTH_SHORT).show();
             //updateUnits();

@@ -5,6 +5,7 @@ package com.foo.umbrella.ui.umbrella_settings;
  */
 
 public interface UmbrellaSettingsPresenter {
+
     void loadSettings();
 
     void updateUnits(String dropDownSelectedItem);

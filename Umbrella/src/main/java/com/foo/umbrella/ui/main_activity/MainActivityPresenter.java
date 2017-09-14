@@ -1,6 +1,6 @@
 package com.foo.umbrella.ui.main_activity;
 
-import com.foo.umbrella.weather.Weather;
+import com.foo.umbrella.entities.Weather;
 
 /**
  * Created by Jonathan Maldonado on 9/13/2017.
@@ -9,6 +9,7 @@ import com.foo.umbrella.weather.Weather;
 public interface MainActivityPresenter {
 
     void getWeather();
+
     void showData(Weather weather);
 
 }

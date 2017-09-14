@@ -27,10 +27,7 @@ public class UmbrellaSettings extends AppCompatActivity implements UmbrellaSetti
         String[] items = new String[]{"Celcius", "Fahrenheit"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
-
-
     }
-
 
     @Override
     protected void onStart() {
@@ -42,7 +39,6 @@ public class UmbrellaSettings extends AppCompatActivity implements UmbrellaSetti
                 // your code here
                 presenter.updateUnits(dropdown.getSelectedItem().toString());
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -54,12 +50,10 @@ public class UmbrellaSettings extends AppCompatActivity implements UmbrellaSetti
         presenter.updateZipCode(zipCode_ET.getText().toString());
     }
 
-
     public void setSettings(String zipCode, int unitSelection) {
         zipCode_ET.setText(zipCode);
         dropdown.setSelection(unitSelection);
     }
-
 
 }
 

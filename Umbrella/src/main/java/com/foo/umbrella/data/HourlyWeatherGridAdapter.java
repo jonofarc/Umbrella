@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by Jonathan Maldonado on 9/10/2017.
+ * Created by Jonathan Maldonado on  9/13/2017.
  */
 
 public class HourlyWeatherGridAdapter extends BaseAdapter {
@@ -40,7 +40,6 @@ public class HourlyWeatherGridAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View gridView;
         if (convertView == null) {
@@ -74,7 +73,6 @@ public class HourlyWeatherGridAdapter extends BaseAdapter {
                 DrawableCompat.setTintList(drawable, mContext.getResources().getColorStateList(R.color.weather_cool));
                 hour_tv.setTextColor(mContext.getResources().getColorStateList(R.color.weather_cool));
                 temp_TV.setTextColor(mContext.getResources().getColorStateList(R.color.weather_cool));
-
             } else if (position == maxPosition && minPosition != maxPosition) {
                 DrawableCompat.setTintList(drawable, mContext.getResources().getColorStateList(R.color.weather_warm));
                 hour_tv.setTextColor(mContext.getResources().getColorStateList(R.color.weather_warm));
@@ -84,15 +82,11 @@ public class HourlyWeatherGridAdapter extends BaseAdapter {
                 hour_tv.setTextColor(mContext.getResources().getColorStateList(R.color.text_color_primary));
                 temp_TV.setTextColor(mContext.getResources().getColorStateList(R.color.text_color_primary));
             }
-
-
         } else {
             gridView = convertView;
         }
-
         return gridView;
     }
-
 
     @Override
     public int getCount() {

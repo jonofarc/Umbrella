@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.foo.umbrella.PreferencesManager;
 import com.foo.umbrella.R;
-import com.foo.umbrella.weather.Weather;
+import com.foo.umbrella.entities.Weather;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +29,6 @@ public class DayWeatherAdapter extends RecyclerView.Adapter<DayWeatherAdapter.Vi
     private ArrayList mDataset;
     private Context mContext;
     public Weather weather;
-
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
@@ -61,7 +60,6 @@ public class DayWeatherAdapter extends RecyclerView.Adapter<DayWeatherAdapter.Vi
                 currentDate.append(" " + weather.getHourlyForecast().get(i).getFCTTIME().getMday().toString());
             }
         }
-
         String min = (String) Collections.min(tempArray);
         String max = (String) Collections.max(tempArray);
         int minPosition = 0;
@@ -74,14 +72,13 @@ public class DayWeatherAdapter extends RecyclerView.Adapter<DayWeatherAdapter.Vi
                 maxPosition = i;
             }
         }
-
         //show current date on card
         holder.currentDate_tv.setText(currentDate.toString());
         HourlyWeatherGridAdapter hourlyWeatherGridAdapter = new HourlyWeatherGridAdapter(mContext, hoursArray, tempArray, conditionArray, minPosition, maxPosition);
         holder.gridView.setAdapter(hourlyWeatherGridAdapter);
         ViewGroup.LayoutParams layoutParams2 = holder.myCardView.getLayoutParams();
         int rows = 0;// at least 1 row should be visible
-        rows += (hours + 3) / 4;// add 1 row for each 4 elements plus 3 as we always want to show at least 1 row
+        rows += (hours + 3) / 4;// add 1 row for each 4 elements  also add 3 to the elements count as we always want to show at least 1 row
         int rowHeight = 90;
         int dateHeight = 60;
         int cardDynamicSizeDP = convertDpToPixels((rows * rowHeight) + dateHeight, mContext);
@@ -89,7 +86,6 @@ public class DayWeatherAdapter extends RecyclerView.Adapter<DayWeatherAdapter.Vi
         holder.myCardView.setLayoutParams(layoutParams2);
 
     }
-
 
     public static int convertDpToPixels(float dp, Context context) {
         Resources resources = context.getResources();
@@ -102,27 +98,20 @@ public class DayWeatherAdapter extends RecyclerView.Adapter<DayWeatherAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-
         GridView gridView;
         TextView currentDate_tv;
         CardView myCardView;
 
-
         public ViewHolder(View v) {
             super(v);
-
             currentDate_tv = (TextView) v.findViewById(R.id.tv_date);
             gridView = (GridView) v.findViewById(R.id.gridview);
             myCardView = (CardView) v.findViewById(R.id.cardview);
-
-
         }
-
     }
 
 
     public DayWeatherAdapter(Context context, ArrayList daysData, Weather recivingWeather) {
-
         mContext = context;
         weather = recivingWeather;
         mDataset = daysData;
@@ -130,9 +119,7 @@ public class DayWeatherAdapter extends RecyclerView.Adapter<DayWeatherAdapter.Vi
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent,
-                                         int viewType) {
-
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.day_weather, parent, false);
         ViewHolder vh = new ViewHolder(v);
