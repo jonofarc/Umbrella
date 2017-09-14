@@ -5,6 +5,7 @@ package com.foo.umbrella.ui.umbrella_settings;
  */
 
 public interface UmbrellaSettingsInteractor {
+
     void setSettings(String zipCode, int unitSelection);
 
 }

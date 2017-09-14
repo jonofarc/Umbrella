@@ -10,7 +10,10 @@ import java.util.ArrayList;
 
 public interface MainActivityInteractor {
     void startSettings();
+
     void setRecyclerView(Weather weather, ArrayList myDays);
+
     void setColors(int currentTemp, int cTempLimit);
+
     void displayCurrentWeather(String temp, String condition, String currentZipcode);
 }

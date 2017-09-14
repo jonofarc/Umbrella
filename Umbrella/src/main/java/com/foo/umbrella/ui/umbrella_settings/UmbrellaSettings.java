@@ -16,34 +16,26 @@ public class UmbrellaSettings extends AppCompatActivity implements UmbrellaSetti
     private UmbrellaSettingsPresenter presenter;
     EditText zipCode_ET;
     Spinner dropdown;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_umbrella_settings);
-
         presenter = new UmbrellaSettingsPresenterImpl(this);
-
-        zipCode_ET= (EditText) findViewById(R.id.et_zipCode);
-
-
-        dropdown = (Spinner)findViewById(R.id.spinner1);
-
+        zipCode_ET = (EditText) findViewById(R.id.et_zipCode);
+        dropdown = (Spinner) findViewById(R.id.spinner1);
         String[] items = new String[]{"Celcius", "Fahrenheit"};
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
-
         dropdown.setAdapter(adapter);
 
 
     }
 
 
-
     @Override
     protected void onStart() {
         super.onStart();
         presenter.loadSettings();
-
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -53,15 +45,9 @@ public class UmbrellaSettings extends AppCompatActivity implements UmbrellaSetti
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
-
-
         });
-
     }
-
-
 
 
     public void updateZipCode(View view) {
@@ -69,11 +55,10 @@ public class UmbrellaSettings extends AppCompatActivity implements UmbrellaSetti
     }
 
 
-    public void setSettings(String zipCode, int unitSelection){
+    public void setSettings(String zipCode, int unitSelection) {
         zipCode_ET.setText(zipCode);
         dropdown.setSelection(unitSelection);
     }
-
 
 
 }
