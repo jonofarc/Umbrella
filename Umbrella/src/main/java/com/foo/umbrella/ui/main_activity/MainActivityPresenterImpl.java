@@ -28,6 +28,7 @@ import okhttp3.Response;
 public class MainActivityPresenterImpl implements MainActivityPresenter {
 
     MainActivityInteractor interactor;
+    WeatherRequestPresenter presenter;
     Context mContext;
     final static private String TAG = MainActivity.class.getSimpleName() + "_TAG";
     private StringBuilder BASE_URL;
@@ -41,6 +42,7 @@ public class MainActivityPresenterImpl implements MainActivityPresenter {
         mContext = mainActivity;
         interactor = mainActivity;
         client = new OkHttpClient.Builder().build();
+        presenter = new WeatherRequestPresenterImpl(this);
     }
 
     public void getWeather() {
@@ -57,7 +59,7 @@ public class MainActivityPresenterImpl implements MainActivityPresenter {
             currentZipCode = settings.getString(PreferencesManager.UmbrellaPreferences.zipCode, "").toString();
             UrlBuilder();
 
-            requestWeather();
+            presenter.requestWeather(BASE_URL.toString());
         }
 
     }
@@ -75,7 +77,7 @@ public class MainActivityPresenterImpl implements MainActivityPresenter {
         }
 
     }
-
+/*
     public void requestWeather() {
         Request request = new Request.Builder().url(BASE_URL.toString()).build();
         client.newCall(request).enqueue(
@@ -117,8 +119,9 @@ public class MainActivityPresenterImpl implements MainActivityPresenter {
 
 
     }
-
-    public void showData() {
+*/
+    public void showData(Weather recivedWeather) {
+        weather=recivedWeather;
         int currentDay = 0;
         int currentYear = 0;
         if (weather.getHourlyForecast() != null) {
