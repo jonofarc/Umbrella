@@ -1,4 +1,4 @@
-package com.foo.umbrella.ui.MainActivity;
+package com.foo.umbrella.ui.main_activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.foo.umbrella.R;
 import java.util.ArrayList;
-import com.foo.umbrella.Weather.Weather;
+import com.foo.umbrella.weather.Weather;
 import com.foo.umbrella.data.DayWeatherAdapter;
-import com.foo.umbrella.ui.UmbrellaSettings.UmbrellaSettings;
+import com.foo.umbrella.ui.umbrella_settings.UmbrellaSettings;
 
 
 public class MainActivity extends AppCompatActivity implements MainActivityInteractor {

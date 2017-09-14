@@ -1,6 +1,6 @@
-package com.foo.umbrella.ui.MainActivity;
+package com.foo.umbrella.ui.main_activity;
 
-import com.foo.umbrella.Weather.Weather;
+import com.foo.umbrella.weather.Weather;
 
 import java.util.ArrayList;
 

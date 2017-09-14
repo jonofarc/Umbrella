@@ -1,4 +1,4 @@
-package com.foo.umbrella.ui.UmbrellaSettings;
+package com.foo.umbrella.ui.umbrella_settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;

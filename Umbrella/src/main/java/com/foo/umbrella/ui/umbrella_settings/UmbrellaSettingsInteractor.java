@@ -1,4 +1,4 @@
-package com.foo.umbrella.ui.UmbrellaSettings;
+package com.foo.umbrella.ui.umbrella_settings;
 
 /**
  * Created by Jonathan Maldonado on 9/13/2017.

@@ -1,4 +1,4 @@
-package com.foo.umbrella.ui.MainActivity;
+package com.foo.umbrella.ui.main_activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,7 +7,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 import com.foo.umbrella.PreferencesManager;
-import com.foo.umbrella.Weather.Weather;
+import com.foo.umbrella.weather.Weather;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import java.io.IOException;

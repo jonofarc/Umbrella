@@ -1,4 +1,4 @@
-package com.foo.umbrella.ui.UmbrellaSettings;
+package com.foo.umbrella.ui.umbrella_settings;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

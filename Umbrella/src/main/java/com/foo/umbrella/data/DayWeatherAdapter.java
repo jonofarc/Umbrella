@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.foo.umbrella.PreferencesManager;
 import com.foo.umbrella.R;
-import com.foo.umbrella.Weather.Weather;
+import com.foo.umbrella.weather.Weather;
 
 import java.util.ArrayList;
 import java.util.Collections;
