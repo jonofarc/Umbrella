@@ -4,17 +4,6 @@ For this code challenge, you will be creating a simple weather application named
 The application will download both the current conditions and an hour by hour forecast from Weather Underground. 
 This application is intended to only be released in the United States. 
 
-We intend for this to take less than 8 hours. Please don’t spend more than 12 hours because, frankly, we value your time. 
-If you think you may go over, we recommend commenting on how you’d accomplish certain tasks. 
-Additionally, please locally commit your code changes regularly throughout the challenge.
-
-In this code challenge we will be paying particular attention to the following items:
-
-* Design fidelity: Can you accurately and efficiently implement the design as specified in the art comps.
-* Functionality: Does the application meet the technical requirements and work reliably?
-* Architecture: How do you structure your application and its classes? Would the application be extensible? How do you encapsulate data parsing and access?
-* Coding practices and use of IDE: How do you organize your files and groups? What practices do you adhere to make the code accessible and usable to other developers? How is source control used within the application?
-* Fit and finish: Do you adhere to the platform’s recommended practices?
 
 # Getting Started
 
@@ -62,10 +51,3 @@ The api package contains an ApiServicesProvider, which provides access to the AP
 
 * WeatherApi: This is the Weather Underground API. The only implemented endpoint is /conditions/hourly.
 
-# Resources
-
-We have set up a few resources for you already.
-All of the icons you need should already be in the appropriate drawable folders.
-The colors used to indicate that the current temperature is "warm" or "cool"
-are provided in colors.xml. Take special note of metrics.md, which defines a
-number of metrics for styling the application.
